@@ -35,9 +35,6 @@ public class Homework03 {
             for (int i = 0; i < length; i++){
                 System.out.println("请输入第" + (i + 1)  + "个整数");
                 arr[i] = sc2.nextInt();
-                if (i == arr.length) {
-                    sc2.close();
-                }
             }
 
         return arr;
