@@ -14,7 +14,6 @@ public class MyComputer {
         this.n1 = n1;
         this.n2 = n2;
     }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("欢迎进入计算器");
@@ -29,21 +28,17 @@ public class MyComputer {
             int option = sc.nextInt();
             switch (option) {
                 case 1:
-                    result.addition();
+                    System.out.println(result.addition());
                     break;
                 case 2:
-                    result.subtraction();
+                    System.out.println(result.subtraction());
                     break;
                 case 3:
-                    result.multiplication();
+                    System.out.println(result.multiplication());
                     break;
 
                 case 4:
-                    if (num2 == 0) {
-                        System.out.println("除数不能为零，请重新输入");
-                    } else {
-                        result.division();
-                    }
+                    System.out.println(result.division());
                     break;
 
                 case 5:
@@ -58,20 +53,24 @@ public class MyComputer {
 
     }
 
-    public void addition() {
-        System.out.println(n1 + n2);
+    public int addition() {
+        return (n1 + n2);
     }
 
-    public void subtraction() {
-        System.out.println(n1 - n2);
+    public int subtraction() {
+        return (n1 - n2);
     }
 
-    public void multiplication() {
-        System.out.println(n1 * n2);
+    public int multiplication() {
+        return (n1 * n2);
     }
 
-    public void division() {
-        System.out.println(n1 / n2);
+    public int division() {
+        if (n2 == 0) {
+            System.out.println("除数不能为零，请重新输入");
+            return 0;
+        }
+        return (n1 / n2);
     }
 
 }
