@@ -7,14 +7,14 @@ public class ChessMethod implements Config {
     static ArrayList<Chess> chesses = new ArrayList<>();
 
     // 添加对象；
-    public static boolean addChess(Chess chess){
+    public static boolean addChess(Chess chess) {
         chesses.add(chess);
         int notRepeat = chesses.size();
         for (int i = 0; i < chesses.size(); i++) {
             for (int j = 0; j < i; j++) {
                 Chess newChess = chesses.get(i);
                 Chess preChess = chesses.get(j);
-                if(newChess.getxIndex() == preChess.getxIndex() && newChess.getyIndex() == preChess.getyIndex()){
+                if (newChess.getxIndex() == preChess.getxIndex() && newChess.getyIndex() == preChess.getyIndex()) {
                     chesses.remove(i);
                     break;
                 }
@@ -25,7 +25,7 @@ public class ChessMethod implements Config {
     }
 
     // 判断胜利；
-    public static boolean win () {
+    public static boolean win() {
         boolean isWin = false;
         //获取当前落子的坐标；
         int x = chesses.get(chesses.size() - 1).getxIndex();
@@ -37,7 +37,7 @@ public class ChessMethod implements Config {
         ArrayList<Integer> obliqueDownIndex = new ArrayList<>();// 135°方向与落子颜色相同的横坐标集合；
 
         // x方向；
-        for (int i = chesses.size() % 2 != 0 ? 0 : 1; i < chesses.size(); i+=2) {
+        for (int i = chesses.size() % 2 != 0 ? 0 : 1; i < chesses.size(); i += 2) {
             if (chesses.get(i).getyIndex() == y) {
                 xIndex.add(chesses.get(i).getxIndex());
             }
@@ -49,7 +49,7 @@ public class ChessMethod implements Config {
         }
 
         // y方向；
-        for (int i = chesses.size() % 2 != 0 ? 0 : 1; i < chesses.size(); i+=2) {
+        for (int i = chesses.size() % 2 != 0 ? 0 : 1; i < chesses.size(); i += 2) {
             if (chesses.get(i).getxIndex() == x) {
                 yIndex.add(chesses.get(i).getyIndex());
             }
@@ -63,8 +63,8 @@ public class ChessMethod implements Config {
         // 斜线方向；
 
         // 落子处45°方向检索
-        for (int i = chesses.size() % 2 != 0 ? 0 : 1; i < chesses.size(); i+=2) {
-            if ((chesses.get(i).getxIndex() -x)== (chesses.get(i).getyIndex()-y )) {
+        for (int i = chesses.size() % 2 != 0 ? 0 : 1; i < chesses.size(); i += 2) {
+            if ((chesses.get(i).getxIndex() - x) == (chesses.get(i).getyIndex() - y)) {
                 obliqueUpIndex.add(chesses.get(i).getxIndex());
             }
         }
@@ -75,8 +75,8 @@ public class ChessMethod implements Config {
         }
 
         // 落子处135°方向检索
-        for (int i = chesses.size() % 2 != 0 ? 0 : 1; i < chesses.size(); i+=2) {
-            if ((chesses.get(i).getxIndex() -x)== -(chesses.get(i).getyIndex()-y )) {
+        for (int i = chesses.size() % 2 != 0 ? 0 : 1; i < chesses.size(); i += 2) {
+            if ((chesses.get(i).getxIndex() - x) == -(chesses.get(i).getyIndex() - y)) {
                 obliqueDownIndex.add(chesses.get(i).getxIndex());
             }
         }

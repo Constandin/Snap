@@ -4,13 +4,14 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;//棋子；
 import javafx.scene.shape.Line;//连线绘制棋盘；
-import javafx.scene.paint.Color;//棋子颜色；
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class GameUI extends Application implements Config {
     // 棋局结束；
@@ -81,63 +82,32 @@ public class GameUI extends Application implements Config {
         btnOptionMode.setLayoutY(800); // y的坐标
         pane.getChildren().add(btnOptionMode);
 
-        Button btnOptionTheme = new Button("切换 主题");
-        btnOptionTheme.setPrefSize(90, 50); // 按钮大小
-        btnOptionTheme.setLayoutX(805); // x的坐标
-        btnOptionTheme.setLayoutY(800); // y的坐标
-        pane.getChildren().add(btnOptionTheme);
+        Button btnQuit = new Button("退   出");
+        btnQuit.setPrefSize(90, 50); // 按钮大小
+        btnQuit.setLayoutX(805); // x的坐标
+        btnQuit.setLayoutY(800); // y的坐标
+        pane.getChildren().add(btnQuit);
 
-        // 创建鼠标
+        // 创建鼠标监听器；
         MouseClick mouse = new MouseClick();
-        // 鼠标监听器；
 
         // 核心：落子及胜负;
         pane.setOnMouseClicked(e -> {
             int x = (int) e.getX(); // 鼠标点击时的x坐标
             int y = (int) e.getY(); // 鼠标点击时的y坐标
-
-
             // 落子；
-            if(mouse.chessDrop(x,y) && !gameOver){
-
-                Circle circle = new Circle(CHESS_SIZE); // 圆形，表示一颗棋子
-                circle.setLayoutX(mouse.xIndex);
-                circle.setLayoutY(mouse.yIndex);
-
+            if (mouse.isChessDrop(x, y) && !gameOver) {
+                // 圆形，表示一颗棋子;
+                Circle circle = new Circle(CHESS_SIZE);
+                circle.setLayoutX(mouse.xIndex0);
+                circle.setLayoutY(mouse.yIndex0);
                 // 设置棋子属性；
                 Chess chess = new Chess();
-                chess.setChess(mouse.xIndex,mouse.yIndex);
-
-                // 添加棋子并判断胜负；
-                if(ChessMethod.addChess(chess)){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("对战结果");
-                    if (ChessMethod.chesses.size() % 2 == 0){
-                        circle.setFill(Color.WHITE);
-                        if (ChessMethod.win()){
-                            alert.setHeaderText("优秀！");
-                            alert.setContentText("白棋胜");
-                            alert.show();
-                            gameOver = true;
-                        }
-
-                    } else {
-                        circle.setFill(Color.BLACK);
-                        if (ChessMethod.win()){
-                            alert.setHeaderText("优秀！");
-                            alert.setContentText("黑棋胜");
-                            alert.show();
-                            gameOver = true;
-                        } else if (!ChessMethod.win() && ChessMethod.chesses.size() == BOARD_SIZE * BOARD_SIZE ){
-                            System.out.println("和棋");
-                            alert.setHeaderText("Sorry！");
-                            alert.setContentText("和棋");
-                            alert.show();
-                            gameOver = true;
-                        }
-                    }
-                    pane.getChildren().add(circle);
+                chess.setChess(mouse.xIndex0, mouse.yIndex0);
+                if (mouse.dropAndWin(mouse.xIndex0, mouse.yIndex0, circle, chess)) {
+                    gameOver = true;
                 }
+                pane.getChildren().add(circle);
             }
         });
 
@@ -146,18 +116,29 @@ public class GameUI extends Application implements Config {
             // pane中的棋子全部删除
             // 存储chess的数组，清空
             // gameover恢复为false
-            // isBlack恢复为true
             pane.getChildren().removeIf(c -> c instanceof Circle); // 移除pane中类型为Circle的控件
             ChessMethod.chesses = new ArrayList<>();
             gameOver = false;
         });
 
-        //
+        // 悔棋；
+        btnLastStep.setOnMouseClicked(e -> {
+            if (!gameOver && ChessMethod.chesses.size() > 0) {
+                pane.getChildren().remove(pane.getChildren().size() - 1);// 移除pane中类型为Circle的控件
+                ChessMethod.chesses.remove(ChessMethod.chesses.size() - 1);
+            }
+        });
 
-
+        // 退出；
+        btnQuit.setOnMouseClicked(e -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Optional<ButtonType> buttonExit = alert.showAndWait();
+            if (buttonExit.orElse(null) == ButtonType.OK) { // 点击的是确定按钮
+                System.exit(0);
+            }
+        });
         primaryStage.setScene(scene); // 设置场景到主舞台
         primaryStage.show(); // 展示舞台
-
 
     }
 }
