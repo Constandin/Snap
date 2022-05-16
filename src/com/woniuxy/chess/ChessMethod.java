@@ -1,9 +1,13 @@
 package com.woniuxy.chess;
 
+import javafx.stage.FileChooser;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
-public class ChessMethod implements Config {
+public class ChessMethod implements Config, Serializable {
     static ArrayList<Chess> chesses = new ArrayList<>();
 
     // 添加对象；
@@ -86,4 +90,38 @@ public class ChessMethod implements Config {
         }
         return isWin;
     }
+
+//    // 保存棋谱；
+//    public static void save(File file) throws IOException, FileNotFoundException {
+//
+//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+//            oos.writeObject(chesses); // 数组序列化，对象也需要序列化；
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+//
+//    // 读取棋谱；
+//    public static void read(File file) throws Exception {
+//
+//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+//            List<Chess> chessSave = (List<Chess>) ois.readObject();
+//            for (Chess chess : chessSave) {
+//                System.out.println(chess);
+//            }
+//
+//        } catch (IOException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+
+//    }
+//
+
+
+
+
 }
+
+
+

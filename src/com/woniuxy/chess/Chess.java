@@ -1,5 +1,8 @@
 package com.woniuxy.chess;
-public class Chess {
+
+import java.io.Serializable;
+
+public class Chess implements Serializable {
     private int xIndex; // x坐标
     private int yIndex;// y坐标
 

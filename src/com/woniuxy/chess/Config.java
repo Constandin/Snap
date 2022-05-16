@@ -1,5 +1,6 @@
 package com.woniuxy.chess;
 
+
 // 棋盘GUI默认属性；
 public interface Config {
     // 线间距；
@@ -10,6 +11,4 @@ public interface Config {
     int MARGIN = 200;
     // 棋子尺寸；
     int CHESS_SIZE = 20;
-
-
 }
