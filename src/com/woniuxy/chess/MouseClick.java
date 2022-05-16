@@ -31,11 +31,11 @@ public class MouseClick implements Config {
 
     }
 
-    public boolean dropAndWin(int xIndex, int yIndex, Circle circle, Chess chess) {
+    public boolean dropAndWin(Circle circle, Chess chess) {
         boolean isOver = false;
 
         // 添加棋子并判断胜负；
-        if (ChessMethod.addChess(chess)) {
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("对战结果");
             if (ChessMethod.chesses.size() % 2 == 0) {
@@ -62,7 +62,7 @@ public class MouseClick implements Config {
                     isOver = true;
                 }
             }
-        }
+
         return isOver;
     }
 }

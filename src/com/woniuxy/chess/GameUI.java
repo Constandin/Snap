@@ -104,10 +104,13 @@ public class GameUI extends Application implements Config {
                 // 设置棋子属性；
                 Chess chess = new Chess();
                 chess.setChess(mouse.xIndex0, mouse.yIndex0);
-                if (mouse.dropAndWin(mouse.xIndex0, mouse.yIndex0, circle, chess)) {
-                    gameOver = true;
+                if (ChessMethod.addChess(chess)) {
+                    if (mouse.dropAndWin(circle, chess)) {
+                        gameOver = true;
+
+                    }
+                    pane.getChildren().add(circle);
                 }
-                pane.getChildren().add(circle);
             }
         });
 

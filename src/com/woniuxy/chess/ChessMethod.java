@@ -20,7 +20,6 @@ public class ChessMethod implements Config {
                 }
             }
         }
-
         return notRepeat == chesses.size();
     }
 
