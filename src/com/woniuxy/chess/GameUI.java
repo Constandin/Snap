@@ -147,6 +147,7 @@ public class GameUI extends Application implements Config {
             // 存储chess的数组，清空
             // gameover恢复为false
             pane.getChildren().removeIf(c -> c instanceof Circle); // 移除pane中类型为Circle的控件
+            pane.getChildren().removeIf(c -> c == prevStep || c == nextStep );
             ChessMethod.chesses = new ArrayList<>();
             gameOver = false;
         });

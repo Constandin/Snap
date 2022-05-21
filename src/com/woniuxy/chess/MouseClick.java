@@ -99,7 +99,7 @@ public class MouseClick implements Config {
         }
 
     }
-
+    // 复盘下一步；
     public boolean isNext(Circle circle) {
         boolean isDropped = false;
         count++;
@@ -116,7 +116,7 @@ public class MouseClick implements Config {
         }
         return isDropped;
     }
-
+    // 复盘上一步；
     public boolean isPrev() {
         boolean isRemoved = true;
         count--;
