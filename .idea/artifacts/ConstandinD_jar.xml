@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="ConstandinD:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ConstandinD_jar</output-path>
+    <root id="root">
+      <element id="archive" name="ConstandinD.jar">
+        <element id="module-output" name="ConstandinD" />
+      </element>
+      <element id="library" level="project" name="mysql-connector-java-8.0.29" />
+    </root>
+  </artifact>
+</component>
